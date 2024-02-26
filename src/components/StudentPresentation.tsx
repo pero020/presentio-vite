@@ -229,7 +229,7 @@ const StudentPresentation = () => {
         <Spinner />
         {showExitButton && 
           <button
-            className="mt-48 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline z-50"
+            className="relative top-24 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline z-50"
             onClick={handleStopConnection}
           >
             Exit
