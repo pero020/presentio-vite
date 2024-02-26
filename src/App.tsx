@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from 'react';
 import './App.css';
 import StudentPage from './components/StudentPage';
 import RoleSwitcher from './components/RoleSwitcher';
-import { Toaster, toast } from 'sonner'
+import { Toaster } from 'sonner'
 import { generateRandomId } from './lib/utils';
 import PresenterPage from './components/PresenterPage.tsx';
 
