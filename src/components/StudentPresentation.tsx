@@ -224,12 +224,12 @@ const StudentPresentation = () => {
   
 
   return (
-    <div>
+    <>
       {!connectedToPresentation && <>
         <Spinner />
         {showExitButton && 
           <button
-            className="relative top-24 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline z-50"
+            className="btn btn-error"
             onClick={handleStopConnection}
           >
             Exit
@@ -238,27 +238,29 @@ const StudentPresentation = () => {
       </>}
 
       {connectedToPresentation && (
-        <div className="mt-4 f">
-          <div className="flex flex-col items-center justify-center flex-1 text-white">
+        <div className="mt-4 w-full flex justify-center">
+          <div className="flex flex-col items-center justify-center flex-1 max-w-sm w-full">
             <div className="mt-4">
               <p className="text-green-500">{endedPresentation ? "Presentation ended" : "Entered Presentation"}</p>
             </div>
             {!endedPresentation && (
-              <div className="mt-8 flex flex-col">
-                <label htmlFor="topicName" className="text-xl mb-2">
-                  Topic you don't understand:
-                </label>
-                <input
+              <div className="mt-8 flex w-full flex-col">
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Topic you don't understand:</span>
+                  </div>
+                  <input
                   type="text"
                   id="topicName"
                   name="topicName"
                   value={topicName}
                   onChange={(e) => setTopicName(e.target.value)}
-                  className="w-64 p-2 rounded border border-blue-300 text-black focus:outline-none focus:border-blue-500"
+                  className="input input-bordered w-full"
                 />
+                </label>
                 <button
                   type="submit"
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="mt-4 btn btn-secondary"
                   onClick={handleTopicSubmit}
                 >
                   Send
@@ -266,7 +268,7 @@ const StudentPresentation = () => {
                 { lostIssue?.status != "confirmed" ? 
                 <button
                   type="submit"
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="mt-4 btn btn-secondary"
                   onClick={handleLostSubmit}
                   disabled={lostIssueButtonDisabled} // Disable the button if the lost issue has been submitted
                 >
@@ -275,7 +277,7 @@ const StudentPresentation = () => {
                 :
                 <button
                   type="submit"
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="mt-4 btn btn-secondary"
                   onClick={handleLostSubmit}
                   disabled={lostIssueButtonDisabled} // Disable the button if the lost issue has been submitted
                 >
@@ -285,12 +287,6 @@ const StudentPresentation = () => {
               </div>
             )}
 
-            <button
-              className="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={handleStopConnection}
-            >
-              Exit
-            </button>
             <div className="mt-4 text-left" style={{ width: "100%", maxWidth: "768px" }}>
               <h2 className="text-xl text-center">Submitted Topics:</h2>
               <ul className='w-full max-h-24 overflow-y-auto'>
@@ -302,10 +298,17 @@ const StudentPresentation = () => {
                 ))}
               </ul>
             </div>
+
+            <button
+              className="mt-4 btn btn-error min-w-24"
+              onClick={handleStopConnection}
+            >
+              EXIT
+            </button>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

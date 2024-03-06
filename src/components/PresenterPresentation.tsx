@@ -80,7 +80,6 @@ const PresenterPresentation = () => {
   }, [connectedToPresentation]);
 
   const handleStopConnection = async () => {
-    await handleEndPresentation()
     setConnectedToPresentation(false);
     setEndedPresentation(false);
     setSubmittedTopics([]);
@@ -249,7 +248,7 @@ const PresenterPresentation = () => {
         <Spinner />
         {showExitButton && 
           <button
-            className="relative top-24 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline z-50"
+            className="btn mt-2 btn-sm btn-error btn-outline"
             onClick={handleStopConnection}
           >
             Exit
@@ -258,7 +257,7 @@ const PresenterPresentation = () => {
       </>}
 
       {connectedToPresentation && (
-        <div className="mt-4 f">
+        <div className="mt-4">
           <div className="flex flex-col items-center justify-center flex-1 text-white">
             <div className="mt-4">
               <p className="text-green-500">{endedPresentation ? "Presentation ended" : "Entered Presentation"}</p>
@@ -306,8 +305,8 @@ const PresenterPresentation = () => {
             )}
 
             <button
-              className="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={handleStopConnection}
+              className="btn btn-error"
+              onClick={handleEndPresentation}
             >
               End Presentation
             </button>

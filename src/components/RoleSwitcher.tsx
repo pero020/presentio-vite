@@ -12,7 +12,12 @@ export default function RoleSwitcher({ currentRole, setCurrentRole }: Props) {
 
   return (
     <div className="flex items-center">
-      <button
+
+    <div role="tablist" className="tabs tabs-bordered">
+      <a role="tab" className={"tab" + (currentRole == "student" ? " tab-active" : "")} onClick={() => toggleRole('student')}>Student</a>
+      <a role="tab" className={"tab" + (currentRole == "presenter" ? " tab-active" : "")} onClick={() => toggleRole('presenter')}>Presenter</a>
+    </div>
+      {/* <button
         className={`py-2 px-4 rounded font-bold focus:outline-none focus:shadow-outline ${
           currentRole === 'student' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600'
         }`}
@@ -27,7 +32,7 @@ export default function RoleSwitcher({ currentRole, setCurrentRole }: Props) {
         onClick={() => toggleRole('presenter')}
       >
         Presenter
-      </button>
+      </button> */}
     </div>
   );
 }

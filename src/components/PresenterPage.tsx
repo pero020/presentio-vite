@@ -61,31 +61,32 @@ function PresenterPage() {
   };
 
   return (
-    <div>
+    <>
       {!userContext?.currentPresentationId && !creatingPresentation && (
-        <div className="mt-8 flex flex-col items-center">
-          <label htmlFor="presentationCode" className="text-xl mb-2">
-            Reconnect to your presentation:
-          </label>
-          <input
-            type="text"
+        <div className="mt-8 flex flex-col w-full max-w-sm items-center">
+          <button
+            className="btn btn-accent"
+            onClick={handleCreatePresentationForm}
+            >
+            Create New Presentation
+          </button>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Reconnect to your presentation:</span>
+            </div>
+            <input
             id="presentationCode"
             name="presentationCode"
             placeholder='ID'
-            className="w-64 p-2 rounded border text-center border-blue-300 text-black focus:outline-none focus:border-blue-500"
+            className="input input-bordered w-full"
           />
+          </label>
           <button
             type="submit"
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="btn btn-secondary mt-2 w-full"
             onClick={handlePresentationIdSubmit}
           >
             Submit
-          </button>
-          <button
-            className="mt-4 bg-green-500 hover:bg-green-600 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={handleCreatePresentationForm}
-          >
-            Create New Presentation
           </button>
         </div>
       )}
@@ -137,7 +138,7 @@ function PresenterPage() {
       {userContext?.currentPresentationId && (
         <PresenterPresentation />
       )}
-    </div>
+    </>
   );
 }
 

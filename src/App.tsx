@@ -5,6 +5,7 @@ import RoleSwitcher from './components/RoleSwitcher';
 import { Toaster } from 'sonner'
 import { generateRandomId } from './lib/utils';
 import PresenterPage from './components/PresenterPage.tsx';
+import Footer from './components/Footer.tsx';
 
 type UserContextType = {
   clientId: string;
@@ -74,16 +75,16 @@ function App() {
       }}
     >
       <Toaster richColors position="bottom-center" />
-      <div className="w-full flex justify-center bg-primary" >
-        <div className='flex flex-col justify-between min-h-screen max-w-3xl p-4'>
+      <div className="w-full flex justify-center  " >
+        <div className='flex flex-col justify-between min-h-screen w-full max-w-3xl p-4'>
 
           <header className="flex flex-col items-center justify-between w-full">
             {!currentPresentationId && (
               <>
                 { clientName && <RoleSwitcher currentRole={currentRole} setCurrentRole={setCurrentRole} /> }
-                <h1 className="text-3xl font-bold mb-4 mt-4">Welcome, {clientName.split(" ")[0] || clientNameTemp.split(" ")[0] || 'Guest'}</h1>
+                <h1 className="text-3xl font-semibold mb-4 mt-4">Welcome, {clientName.split(" ")[0] || clientNameTemp.split(" ")[0] || 'Guest'}</h1>
                 { clientName && <button
-                  className="py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-gray-500 hover:bg-gray-600"
+                  className="btn btn-secondary"
                   onClick={handleNewUser}
                 >
                   New User
@@ -92,23 +93,25 @@ function App() {
             )}
           </header>
 
-          <div className="flex flex-col items-center justify-center flex-1 text-white">
+          <div className="flex flex-col items-center justify-center w-full flex-1">
             {!clientName && (
-              <div className="mt-8 flex flex-col">
-                <label htmlFor="clientName" className="text-xl mb-2">
-                  Enter Your Name:
-                </label>
-                <input
+              <div className="mt-8 flex flex-col w-full max-w-sm">
+                <label className="form-control w-full max-w-sm">
+                  <div className="label">
+                    <span className="label-text">What is your name?</span>
+                  </div>
+                  <input
                   type="text"
                   id="clientName"
                   name="clientName"
                   value={clientNameTemp}
                   onChange={handleNameChange}
-                  className="w-64 p-2 rounded border border-blue-300 text-black focus:outline-none focus:border-blue-500"
+                  className="input input-bordered w-full max-w-sm"
                 />
+                </label>
                 <button
                   type="submit"
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="btn btn-secondary mt-2"
                   onClick={handleNameSubmit}
                 >
                   Enter
@@ -119,13 +122,9 @@ function App() {
             {clientName && currentRole === 'student' && <StudentPage />}
             {clientName && currentRole === "presenter" && <PresenterPage />}
           </div>
-
-          <footer>
-            <p>Presentio</p>
-          </footer>
-
         </div>
       </div>
+      <Footer />
     </UserContext.Provider>
   );
 }
