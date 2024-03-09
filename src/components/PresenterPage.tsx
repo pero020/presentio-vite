@@ -29,7 +29,7 @@ function PresenterPage() {
     };
 
     try {
-      const response = await fetch(apiUrl + "/createPresentation", {
+      const response = await fetch(apiUrl + "/createNewPresentation", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
