@@ -1,20 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../App';
 import { toast } from 'sonner';
 import { generateRandomId } from '../lib/utils';
 import Spinner from './Spinner';
 import useWebSocket, { ReadyState } from "react-use-websocket"
-
-type TopicType = {
-  id: string,
-  name: string
-}
-
-type LostIssueType = {
-  id: string,
-  time: string,
-  status: string
-}
+import { UserContext } from './layouts/AppLayout';
+import { LostIssueType, TopicType } from '../types/types';
 
 const StudentPresentation = () => {
   const userContext = useContext(UserContext);
@@ -24,7 +14,7 @@ const StudentPresentation = () => {
   const [lostIssue, setLostIssue] = useState<LostIssueType | null>()
   const [endedPresentation, setEndedPresentation] = useState<boolean>(false);
   const [showExitButton, setShowExitButton] = useState(false);
-  const [lostIssueButtonDisabled, setLostIssueButtonDisabled] = useState(false); // State to control the disabled state of the lost issue button
+  const [lostIssueButtonDisabled, setLostIssueButtonDisabled] = useState(false);
 
   const WEBSOCKET_URL = import.meta.env.VITE_WEBSOCKET_URL || "wss://lob45ipd7l.execute-api.eu-central-1.amazonaws.com/production/";
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(

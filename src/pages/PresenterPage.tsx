@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react';
-import { UserContext } from '../App';
-import PresenterPresentation from './PresenterPresentation';
+import { useState, useContext, useEffect } from 'react';
+import PresenterPresentation from '../components/PresenterPresentation';
+import { UserContext } from '../components/layouts/AppLayout';
+import { useNavigate } from 'react-router-dom';
 
 function PresenterPage() {
   const userContext = useContext(UserContext);
@@ -8,6 +9,8 @@ function PresenterPage() {
   const [presentationName, setPresentationName] = useState('');
   const [minimalTopicIssues, setMinimalTopicIssues] = useState(2);
   const [minimalLostIssues, setMinimalLostIssues] = useState(4);
+  const navigate = useNavigate();
+
   const handleCreatePresentation = async () => {
     const apiUrl = import.meta.env.VITE_HTTP_URL; // Fetch the API URL from environment variables
     const payload = {
@@ -50,6 +53,15 @@ function PresenterPage() {
       console.error('Error creating presentation:', error);
     }
   };
+
+  
+  useEffect(() => {
+    console.log(userContext)
+    if (!userContext?.clientName) {
+      userContext?.setCurrentRole("presenter")
+      navigate("/app")
+    }
+  }, [])
 
   const handlePresentationIdSubmit = () => {
     const presentationCode = (document.getElementById('presentationCode') as HTMLInputElement)?.value;

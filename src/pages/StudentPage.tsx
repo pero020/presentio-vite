@@ -1,14 +1,23 @@
-import { useContext } from 'react';
-import { UserContext } from '../App';
-import StudentPresentation from './StudentPresentation';
+import { useContext, useEffect } from 'react';
+import StudentPresentation from '../components/StudentPresentation';
+import { UserContext } from '../components/layouts/AppLayout';
+import { useNavigate } from 'react-router-dom';
 
 function StudentPage() {
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handlePresentationIdSubmit = () => {
     const presentationCode = (document.getElementById('presentationCode') as HTMLInputElement)?.value;
     userContext?.setCurrentPresentationId(presentationCode || '');
   };
+  
+  useEffect(() => {
+    if (!userContext?.clientName) {
+      userContext?.setCurrentRole("student")
+      navigate("/app")
+    }
+  }, [])
 
   return (
     <>

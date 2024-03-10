@@ -1,38 +1,22 @@
-import React from 'react';
+import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import { UserContext } from './layouts/AppLayout';
 
-type Props = {
-  currentRole: string | undefined;
-  setCurrentRole: React.Dispatch<React.SetStateAction<string>>;
-};
+export default function RoleSwitcher() {
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
-export default function RoleSwitcher({ currentRole, setCurrentRole }: Props) {
   const toggleRole = (role: string) => {
-    setCurrentRole(role);
+    userContext?.setCurrentRole(role);
+    navigate("/app" + (role ? "/" + role : ""))
   };
 
   return (
     <div className="flex items-center">
-
-    <div role="tablist" className="tabs tabs-bordered">
-      <a role="tab" className={"tab" + (currentRole == "student" ? " tab-active" : "")} onClick={() => toggleRole('student')}>Student</a>
-      <a role="tab" className={"tab" + (currentRole == "presenter" ? " tab-active" : "")} onClick={() => toggleRole('presenter')}>Presenter</a>
-    </div>
-      {/* <button
-        className={`py-2 px-4 rounded font-bold focus:outline-none focus:shadow-outline ${
-          currentRole === 'student' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600'
-        }`}
-        onClick={() => toggleRole('student')}
-      >
-        Student
-      </button>
-      <button
-        className={`ml-4 py-2 px-4 rounded font-bold focus:outline-none focus:shadow-outline ${
-          currentRole === 'presenter' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600'
-        }`}
-        onClick={() => toggleRole('presenter')}
-      >
-        Presenter
-      </button> */}
+      <div role="tablist" className="tabs tabs-bordered">
+        <a role="tab" className={"tab" + (userContext?.currentRole == "student" ? " tab-active" : "")} onClick={() => toggleRole('student')}>Student</a>
+        <a role="tab" className={"tab" + (userContext?.currentRole == "presenter" ? " tab-active" : "")} onClick={() => toggleRole('presenter')}>Presenter</a>
+      </div>
     </div>
   );
 }
